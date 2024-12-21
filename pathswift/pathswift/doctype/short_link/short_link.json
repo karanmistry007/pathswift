@@ -1,0 +1,101 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2024-12-21 14:08:30.062674",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "destination_url",
+  "short_link",
+  "column_break_xybr",
+  "status",
+  "section_break_njih",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "destination_url",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Destination URL",
+   "options": "URL",
+   "reqd": 1
+  },
+  {
+   "fieldname": "short_link",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Short Link",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Description"
+  },
+  {
+   "fieldname": "column_break_xybr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_njih",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Active\nInactive\nExpired"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Short Link Click",
+   "link_fieldname": "short_link"
+  }
+ ],
+ "modified": "2024-12-21 15:16:26.135125",
+ "modified_by": "Administrator",
+ "module": "PathSwift",
+ "name": "Short Link",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [
+  {
+   "color": "Blue",
+   "title": "Active"
+  },
+  {
+   "color": "Orange",
+   "title": "Inactive"
+  },
+  {
+   "color": "Red",
+   "title": "Expired"
+  }
+ ],
+ "title_field": "destination_url"
+}

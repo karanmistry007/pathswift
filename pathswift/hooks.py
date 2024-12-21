@@ -5,6 +5,9 @@ app_description = "PathSwift: Speed, simplicity, and control for your links."
 app_email = "ksmistry007@gmail.com"
 app_license = "agpl-3.0"
 
+# ? HOOK TO HANDLE CUSTOM PATH HANDLERS
+website_path_resolver = "pathswift.utils.handle_path_redirect"
+
 # Apps
 # ------------------
 
@@ -244,4 +247,3 @@ app_license = "agpl-3.0"
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
-

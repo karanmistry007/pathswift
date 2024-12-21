@@ -40,8 +40,6 @@ def handle_path_redirect(path: str):
         # ? GET REQUEST HEADERS DATA
         request_headers = frappe.request.headers
 
-        print("\n\n\n", request_headers)
-
         # ? ADD RECORD TO SHORT LINK CLICK AND SUBMIT IT
         short_link_click_doc = frappe.get_doc(
             {

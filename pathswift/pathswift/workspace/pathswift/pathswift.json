@@ -1,0 +1,51 @@
+{
+ "app": "pathswift",
+ "charts": [],
+ "content": "[{\"id\":\"jE7_YfH4SO\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">PathSwift</span>\",\"col\":12}},{\"id\":\"BO4sf9C6Gx\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Short Link\",\"col\":3}},{\"id\":\"yChoC0MckI\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Short Link Click\",\"col\":3}}]",
+ "creation": "2025-01-08 22:51:29.151216",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "link-url",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "PathSwift",
+ "link_type": "DocType",
+ "links": [],
+ "modified": "2025-01-08 22:53:43.602783",
+ "modified_by": "Administrator",
+ "module": "PathSwift",
+ "name": "PathSwift",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 23.0,
+ "shortcuts": [
+  {
+   "color": "Blue",
+   "doc_view": "List",
+   "format": "{}",
+   "label": "Short Link",
+   "link_to": "Short Link",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "format": "{}",
+   "label": "Short Link Click",
+   "link_to": "Short Link Click",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "PathSwift",
+ "type": "Workspace"
+}

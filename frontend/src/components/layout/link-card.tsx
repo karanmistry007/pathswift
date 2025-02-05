@@ -1,4 +1,3 @@
-import React from 'react'
 import { MdContentCopy } from "react-icons/md";
 import { Card, CardContent } from '../ui/card'
 import { GoLink } from "react-icons/go";
@@ -6,15 +5,27 @@ import { Button } from '../ui/button';
 import { PiCursorClickLight } from "react-icons/pi";
 import { FiMoreVertical } from "react-icons/fi";
 import { Badge } from '@/components/ui/badge';
+import LinkDialog from "./link-dialog";
+import { useState } from "react";
 
 type Props = {}
 
 const LinkCard = (props: Props) => {
+
+    const [openDialog, setOpenDialog] = useState(false);
+
+    const handleDialogDisplay = (data: boolean) => {
+        setOpenDialog(data);
+    }
+
     return (
         <>
 
             {/* CARD */}
-            <Card className="link-card hover:shadow-[0px_0px_20px_0px_rgba(0,0,0,0.1)] transition-all duration-300 ease-in-out cursor-pointer p-0">
+            <Card
+                className="link-card hover:shadow-[0px_0px_20px_0px_rgba(0,0,0,0.1)] transition-all duration-300 ease-in-out cursor-pointer p-0"
+                onClick={() => { handleDialogDisplay(true) }}
+            >
                 <CardContent className='flex justify-between items-center gap-4 p-4'>
 
                     {/* CARD ICON */}
@@ -39,10 +50,10 @@ const LinkCard = (props: Props) => {
                         </div>
 
                         {/* DESTINATION LINK */}
-                        <div className="destination-link">
+                        <div className="destination-link  whitespace-nowrap max-w-[60%] overflow-hidden text-ellipsis">
                             <a
                                 href='https://karanmistryyy.pythonanywhere.com/'
-                                className='destination-link text-sm hover:underline'
+                                className='destination-link text-sm hover:underline w-fit'
                                 target='_blank'
                             >
                                 https://karanmistryyy.pythonanywhere.com/
@@ -55,7 +66,7 @@ const LinkCard = (props: Props) => {
 
                         {/* LINK STATUS */}
                         <Badge
-                            className='link-status'
+                            className='link-status hidden md:block'
                             variant={'default'}
                         >
                             Active
@@ -63,7 +74,7 @@ const LinkCard = (props: Props) => {
 
                         {/* LINK CLICKS */}
                         <Button
-                            className='link-clicks gap-1'
+                            className='link-clicks gap-1  hidden md:flex'
                             variant={'outline'}
                         >
                             <PiCursorClickLight />
@@ -81,7 +92,14 @@ const LinkCard = (props: Props) => {
                         </Button>
                     </div>
                 </CardContent>
-            </Card>
+            </Card >
+            <LinkDialog
+                // buttonTitle="Create Link"
+                buttonVariant="default"
+                linkData={null}
+                defaultOpen={openDialog}
+                handleClose={handleDialogDisplay}
+            />
         </>
     )
 }

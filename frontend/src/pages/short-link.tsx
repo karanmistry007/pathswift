@@ -1,6 +1,7 @@
 import { AppSidebar } from "@/components/app-sidebar"
 import Filters from "@/components/layout/filters"
 import LinkCard from "@/components/layout/link-card"
+import LinkDialog from "@/components/layout/link-dialog"
 import SearchBar from "@/components/layout/search-bar"
 import Sort from "@/components/layout/sort"
 import {
@@ -139,61 +140,54 @@ const ShortLink = (props: Props) => {
                     <main className="main p-5">
 
                         {/* TOOLBAR */}
-                        <div className="toolbar flex justify-between items-center">
+                        <div className="toolbar flex flex-col sm:flex-row flex-wrap gap-5 justify-between items-center">
 
-                            {/* TOOLBAR SECTION 1 */}
-                            <div className="toolbar-section-1 flex gap-5 justify-start items-center">
 
-                                {/* FILTER */}
-                                <div className="filter">
-                                    <Filters
-                                        filters={filters}
-                                        useStatusFilterData={useStatusFilterData}
-                                        getAllCategories={[{ name: "Test", category: "Test" }]}
-                                        handleFilters={handleFilters}
-                                        handleClearFilters={handleClearFilters}
-                                        setRefreshState={setRefreshState}
-                                        defaultFilter={[]}
-                                    />
-                                </div>
-
-                                {/* SORT */}
-                                <div className="sort">
-                                    <Sort
-                                        currentSort={currentSort}
-                                        currentSortDirection={currentSortDirection}
-                                        useSortData={useSortData}
-                                        setCurrentSort={setCurrentSort}
-                                        setCurrentSortDirection={setCurrentSortDirection}
-                                        setRefreshState={setRefreshState}
-                                    />
-                                </div>
+                            {/* FILTER */}
+                            <div className="filter">
+                                <Filters
+                                    filters={filters}
+                                    useStatusFilterData={useStatusFilterData}
+                                    getAllCategories={[{ name: "Test", category: "Test" }]}
+                                    handleFilters={handleFilters}
+                                    handleClearFilters={handleClearFilters}
+                                    setRefreshState={setRefreshState}
+                                    defaultFilter={[]}
+                                />
                             </div>
 
-                            {/* TOOLBAR SECTION 2 */}
-                            <div className="toolbar-section-2 flex gap-5 justify-start items-center">
-
-                                {/* SEARCHBAR */}
-                                <div className="search-bar">
-                                    <SearchBar
-                                        placeholder="Search Links..."
-                                        onChange={(value) => console.log("Search value:", value)}
-                                        onSubmit={(value) => console.log("Form submitted with:", value)}
-                                    />
-                                </div>
-
-                                {/* CREATE LINK */}
-                                <div className="create-link">
-                                    <Button
-                                        variant={"default"}>
-                                        Create Link
-                                    </Button>
-                                </div>
-
+                            {/* SORT */}
+                            <div className="sort flex-grow">
+                                <Sort
+                                    currentSort={currentSort}
+                                    currentSortDirection={currentSortDirection}
+                                    useSortData={useSortData}
+                                    setCurrentSort={setCurrentSort}
+                                    setCurrentSortDirection={setCurrentSortDirection}
+                                    setRefreshState={setRefreshState}
+                                />
                             </div>
 
+                            {/* SEARCHBAR */}
+                            <div className="search-bar">
+                                <SearchBar
+                                    placeholder="Search Links..."
+                                    onChange={(value) => console.log("Search value:", value)}
+                                    onSubmit={(value) => console.log("Form submitted with:", value)}
+                                />
+                            </div>
+
+                            {/* CREATE LINK */}
+                            <div className="create-link">
+                                <LinkDialog
+                                    buttonTitle="Create Link"
+                                    buttonVariant="default"
+                                    linkData={null}
+                                />
+                            </div>
                         </div>
 
+                        {/* MAIN CONTENT */}
                         <div className="main-content my-5">
                             <LinkCard />
                         </div>

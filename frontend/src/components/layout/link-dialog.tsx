@@ -13,6 +13,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useEffect, useState } from "react"
+import { copyToClipboard } from '@/utils/utils'
 
 // Schema definition
 const linkFormSchema = z.object({
@@ -70,22 +71,6 @@ function LinkForm({
             toast.error("Something went wrong. Please try again.")
         } finally {
             setIsSubmitting(false)
-        }
-    }
-
-    const copyToClipboard = async (text: string, type: string) => {
-        try {
-            await navigator.clipboard.writeText(text)
-            toast.success(`${type} copied to clipboard.`, {
-                duration: 2000,
-            })
-        } catch (err) {
-            toast.error("Failed to copy. Please try again.", {
-                action: {
-                    label: "Try again",
-                    onClick: () => copyToClipboard(text, type),
-                },
-            })
         }
     }
 
@@ -257,7 +242,7 @@ type Props = {
     defaultOpen?: boolean;
     buttonTitle?: string;
     buttonVariant?: "default" | "outline" | "secondary";
-    handleClose: (data: boolean) => void;
+    handleClose?: (data: boolean) => void;
 }
 
 // Main Dialog Component

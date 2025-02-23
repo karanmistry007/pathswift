@@ -1,27 +1,25 @@
-import { AppSidebar } from "@/components/app-sidebar"
-import Filters from "@/components/layout/filters"
-import LinkCard from "@/components/layout/link-card"
-import LinkDialog from "@/components/layout/link-dialog"
-import SearchBar from "@/components/layout/search-bar"
-import Sort from "@/components/layout/sort"
+import { AppSidebar } from "@/components/app-sidebar";
+import Filters from "@/components/layout/filters";
+import LinkCard from "@/components/layout/link-card";
+import LinkDialog from "@/components/layout/link-dialog";
+import SearchBar from "@/components/layout/search-bar";
+import Sort from "@/components/layout/sort";
 import {
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbList,
     BreadcrumbPage,
-} from "@/components/ui/breadcrumb"
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
+} from "@/components/ui/breadcrumb";
+import { Separator } from "@/components/ui/separator";
 import {
     SidebarInset,
     SidebarProvider,
     SidebarTrigger,
-} from "@/components/ui/sidebar"
-import { useState } from "react"
-
+} from "@/components/ui/sidebar";
+import { useState } from "react";
 
 // ? PROPS TYPE
-type Props = {}
+type Props = {};
 
 // ? SORT TYPE
 interface useSortDataItems {
@@ -40,7 +38,6 @@ const useSortData: useSortDataItems[] = [
     { name: "Description", sort: "description" },
 ];
 
-
 // ? FILTER TYPE
 interface useStatusFiltersItems {
     name: string;
@@ -51,8 +48,7 @@ const useStatusFilterData: useStatusFiltersItems[] = [
     { name: "Open" },
     { name: "Completed" },
     { name: "Cancelled" },
-]
-
+];
 
 const ShortLink = (props: Props) => {
 
@@ -65,8 +61,6 @@ const ShortLink = (props: Props) => {
 
     // ? UPDATE REFRESH STATE
     const handleRefreshState = (state: boolean) => setRefreshState(state);
-
-
 
     // ? HANDLE FILTERS DATA
     const handleFilters = (key: string, value: string, child_table = "") => {
@@ -111,13 +105,14 @@ const ShortLink = (props: Props) => {
 
     // ? HANDLE CLEAR FILTERS
     const handleClearFilters = () => setFilters([]);
+
     return (
         <>
             <SidebarProvider>
                 <AppSidebar />
                 <SidebarInset>
 
-                    {/* HEADER */}
+                    {/* ? HEADER */}
                     <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
                         <div className="flex items-center gap-2 px-4">
                             <SidebarTrigger className="-ml-1" />
@@ -136,14 +131,13 @@ const ShortLink = (props: Props) => {
                         </div>
                     </header>
 
-                    {/* MAIN SECTION */}
+                    {/* ? MAIN SECTION */}
                     <main className="main p-5">
 
-                        {/* TOOLBAR */}
+                        {/* ? TOOLBAR */}
                         <div className="toolbar flex flex-col sm:flex-row flex-wrap gap-5 justify-between items-center">
 
-
-                            {/* FILTER */}
+                            {/* ? FILTER */}
                             <div className="filter">
                                 <Filters
                                     filters={filters}
@@ -156,7 +150,7 @@ const ShortLink = (props: Props) => {
                                 />
                             </div>
 
-                            {/* SORT */}
+                            {/* ? SORT */}
                             <div className="sort flex-grow">
                                 <Sort
                                     currentSort={currentSort}
@@ -168,7 +162,7 @@ const ShortLink = (props: Props) => {
                                 />
                             </div>
 
-                            {/* SEARCHBAR */}
+                            {/* ? SEARCHBAR */}
                             <div className="search-bar">
                                 <SearchBar
                                     placeholder="Search Links..."
@@ -177,7 +171,7 @@ const ShortLink = (props: Props) => {
                                 />
                             </div>
 
-                            {/* CREATE LINK */}
+                            {/* ? CREATE LINK */}
                             <div className="create-link">
                                 <LinkDialog
                                     buttonTitle="Create Link"
@@ -187,16 +181,23 @@ const ShortLink = (props: Props) => {
                             </div>
                         </div>
 
-                        {/* MAIN CONTENT */}
-                        <div className="main-content my-5">
-                            <LinkCard />
+                        {/* ? MAIN CONTENT */}
+                        <div className="main-content my-5 flex flex-col gap-5">
+                            {Array(15).fill(null).map((item, index) => (
+                                <LinkCard
+                                    key={index}
+                                    shortLink="dub.sh/karanmistryyy"
+                                    destinationUrl="https://karanmistryyy.pythonanywhere.com/"
+                                    status="active"
+                                    clicks={8}
+                                />
+                            ))}
                         </div>
-
                     </main>
                 </SidebarInset>
             </SidebarProvider>
         </>
-    )
-}
+    );
+};
 
-export default ShortLink
+export default ShortLink;

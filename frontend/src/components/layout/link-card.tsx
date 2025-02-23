@@ -1,102 +1,116 @@
-import { MdContentCopy } from "react-icons/md";
-import { Card, CardContent } from '../ui/card'
-import { GoLink } from "react-icons/go";
-import { Button } from '../ui/button';
-import { PiCursorClickLight } from "react-icons/pi";
-import { FiMoreVertical } from "react-icons/fi";
-import { Badge } from '@/components/ui/badge';
-import LinkDialog from "./link-dialog";
-import { useState } from "react";
+"use client"
 
-type Props = {}
+import type React from "react"
+import { useState } from "react"
+import { MdContentCopy } from "react-icons/md"
+import { GoLink } from "react-icons/go"
+import { PiCursorClickLight } from "react-icons/pi"
+import { FiMoreVertical } from "react-icons/fi"
 
-const LinkCard = (props: Props) => {
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import LinkDialog from "./link-dialog"
+import { copyToClipboard } from "@/utils/utils"
 
-    const [openDialog, setOpenDialog] = useState(false);
+// INTERFACE FOR LINK CARD PROPERTIES
+interface LinkCardProps {
+    shortLink: string
+    destinationUrl: string
+    status: "active" | "inactive" | "expired"
+    clicks: number
+    linkData?: any // KEEPING THIS AS ANY SINCE WE DON'T KNOW THE STRUCTURE NEEDED FOR LINKDIALOG
+}
 
+const LinkCard = ({ shortLink, destinationUrl, status, clicks, linkData = null }: LinkCardProps) => {
+    // STATE TO CONTROL THE DIALOG VISIBILITY
+    const [openDialog, setOpenDialog] = useState(false)
+
+    // FUNCTION TO TOGGLE DIALOG VISIBILITY
     const handleDialogDisplay = (data: boolean) => {
-        setOpenDialog(data);
+        setOpenDialog(data)
+    }
+
+    // FUNCTION TO COPY SHORT LINK TO CLIPBOARD
+    const handleCopyToClipboard = (e: React.MouseEvent) => {
+        e.stopPropagation()
+        copyToClipboard(shortLink, "Short link")
+    }
+
+    // FUNCTION TO HANDLE CLICKS BUTTON CLICK EVENT
+    const handleClicksButton = (e: React.MouseEvent) => {
+        e.stopPropagation()
+    }
+
+    // FUNCTION TO HANDLE MORE OPTIONS BUTTON CLICK EVENT
+    const handleMoreButton = (e: React.MouseEvent) => {
+        e.stopPropagation()
+    }
+
+    // FUNCTION TO HANDLE DESTINATION LINK CLICK EVENT
+    const handleDestinationClick = (e: React.MouseEvent) => {
+        e.stopPropagation()
     }
 
     return (
         <>
-
-            {/* CARD */}
+            {/* LINK CARD COMPONENT */}
             <Card
-                className="link-card hover:shadow-[0px_0px_20px_0px_rgba(0,0,0,0.1)] transition-all duration-300 ease-in-out cursor-pointer p-0"
-                onClick={() => { handleDialogDisplay(true) }}
+                className="link-card cursor-pointer p-0 transition-all duration-300 ease-in-out hover:shadow-[0px_0px_20px_0px_rgba(0,0,0,0.1)]"
+                onClick={() => {
+                    handleDialogDisplay(true)
+                }}
             >
-                <CardContent className='flex justify-between items-center gap-4 p-4'>
-
-                    {/* CARD ICON */}
+                <CardContent className="flex items-center justify-between gap-4 p-4">
+                    {/* ICON SECTION */}
                     <div className="card-icon">
-                        <GoLink className='w-10 h-10 bg-gray-100 p-2.5 rounded-full' />
+                        <GoLink className="h-10 w-10 rounded-full bg-gray-100 p-2.5" />
                     </div>
 
-                    {/* CARD DETAILS */}
+                    {/* LINK DETAILS SECTION */}
                     <div className="card-details grow">
-
-                        {/* SOURCE LINK */}
-                        <div className='source-link flex justify-start items-center gap-1'>
-                            <h5 className='text-base font-medium'>
-                                dub.sh/karanmistryyy
-                            </h5>
-                            <Button
-                                variant={'link'}
-                                className='p-1 hover:bg-[#f3f3f3] h-auto'
-                            >
+                        <div className="source-link flex items-center justify-start gap-1">
+                            <h5 className="text-base font-medium">{shortLink}</h5>
+                            <Button variant="link" className="h-auto p-1 hover:bg-[#f3f3f3]" onClick={handleCopyToClipboard}>
                                 <MdContentCopy />
                             </Button>
                         </div>
 
-                        {/* DESTINATION LINK */}
-                        <div className="destination-link  whitespace-nowrap max-w-[60%] overflow-hidden text-ellipsis">
+                        <div className="destination-link max-w-[60%] overflow-hidden text-ellipsis whitespace-nowrap">
                             <a
-                                href='https://karanmistryyy.pythonanywhere.com/'
-                                className='destination-link text-sm hover:underline w-fit'
-                                target='_blank'
+                                href={destinationUrl}
+                                className="destination-link w-fit text-sm hover:underline"
+                                target="_blank"
+                                onClick={handleDestinationClick}
+                                rel="noreferrer"
                             >
-                                https://karanmistryyy.pythonanywhere.com/
+                                {destinationUrl}
                             </a>
                         </div>
                     </div>
 
-                    {/* CARD BUTTONS */}
-                    <div className="card-buttons flex justify-center items-center gap-4">
-
-                        {/* LINK STATUS */}
-                        <Badge
-                            className='link-status hidden md:block'
-                            variant={'default'}
-                        >
-                            Active
+                    {/* BUTTONS SECTION */}
+                    <div className="card-buttons flex items-center justify-center gap-4">
+                        <Badge className="link-status hidden md:block" variant={status === "active" ? "default" : "secondary"}>
+                            {status.charAt(0).toUpperCase() + status.slice(1)}
                         </Badge>
 
-                        {/* LINK CLICKS */}
-                        <Button
-                            className='link-clicks gap-1  hidden md:flex'
-                            variant={'outline'}
-                        >
+                        <Button className="link-clicks hidden gap-1 md:flex" variant="outline" onClick={handleClicksButton}>
                             <PiCursorClickLight />
-                            <span>
-                                8 Clicks
-                            </span>
+                            <span>{clicks} Clicks</span>
                         </Button>
 
-                        {/* SHOW MORE */}
-                        <Button
-                            className='show-more hover:bg-[#f3f3f3] p-2'
-                            variant={'link'}
-                        >
+                        <Button className="show-more p-2 hover:bg-[#f3f3f3]" variant="link" onClick={handleMoreButton}>
                             <FiMoreVertical />
                         </Button>
                     </div>
                 </CardContent>
-            </Card >
+            </Card>
+
+            {/* LINK DIALOG COMPONENT */}
             <LinkDialog
-                // buttonTitle="Create Link"
                 buttonVariant="default"
-                linkData={null}
+                linkData={linkData}
                 defaultOpen={openDialog}
                 handleClose={handleDialogDisplay}
             />

@@ -61,14 +61,14 @@ const LinkCard = ({ shortLink, destinationUrl, status, clicks, linkData = null }
                     handleDialogDisplay(true)
                 }}
             >
-                <CardContent className="flex items-center justify-between gap-4 p-4">
+                <CardContent className="flex items-center gap-4 p-4">
                     {/* ICON SECTION */}
                     <div className="card-icon">
                         <GoLink className="h-10 w-10 rounded-full bg-gray-100 p-2.5" />
                     </div>
 
                     {/* LINK DETAILS SECTION */}
-                    <div className="card-details grow">
+                    <div className="card-details grow max-w-[60%] lg:max-w-[70%] mr-auto">
                         <div className="source-link flex items-center justify-start gap-1">
                             <h5 className="text-base font-medium">{shortLink}</h5>
                             <Button variant="link" className="h-auto p-1 hover:bg-[#f3f3f3]" onClick={handleCopyToClipboard}>
@@ -76,10 +76,10 @@ const LinkCard = ({ shortLink, destinationUrl, status, clicks, linkData = null }
                             </Button>
                         </div>
 
-                        <div className="destination-link max-w-[60%] overflow-hidden text-ellipsis whitespace-nowrap">
+                        <div className="destination-link overflow-hidden text-ellipsis whitespace-nowrap">
                             <a
                                 href={destinationUrl}
-                                className="destination-link w-fit text-sm hover:underline"
+                                className="destination-link text-sm hover:underline"
                                 target="_blank"
                                 onClick={handleDestinationClick}
                                 rel="noreferrer"

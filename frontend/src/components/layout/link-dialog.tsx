@@ -12,8 +12,9 @@ import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from 
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { useEffect, useState } from "react"
+import { ReactElement, useEffect, useState } from "react"
 import { copyToClipboard } from '@/utils/utils'
+import { IconContext } from "react-icons/lib"
 
 // Schema definition
 const linkFormSchema = z.object({
@@ -241,8 +242,9 @@ type Props = {
     linkData: any;
     defaultOpen?: boolean;
     buttonTitle?: string;
+    buttonIcon?: ReactElement;
     buttonVariant?: "default" | "outline" | "secondary";
-    handleClose?: (data: boolean) => void;
+    handleClose: (data: boolean) => void;
 }
 
 // Main Dialog Component
@@ -276,7 +278,7 @@ export const LinkDialog = (props: Props) => {
             <>
                 <Dialog open={open} onOpenChange={(open: boolean) => { setOpen(open); props.handleClose(open) }} >
                     <DialogTrigger asChild className={`${!props.buttonTitle && "hidden"}`}>
-                        <Button variant={`${props.buttonVariant ? props.buttonVariant : "outline"}`}>{props.buttonTitle}</Button>
+                        <Button variant={`${props.buttonVariant ? props.buttonVariant : "outline"}`}>{props?.buttonIcon} {props.buttonTitle}</Button>
                     </DialogTrigger>
                     <DialogContent className="xl:max-w-[1000px] overflow-y-auto max-h-[85vh]">
                         <DialogHeader>
@@ -298,7 +300,7 @@ export const LinkDialog = (props: Props) => {
         <>
             <Drawer open={open} onOpenChange={setOpen} onClose={() => { props.handleClose(false) }}>
                 <DrawerTrigger asChild className={`${!props.buttonTitle && "hidden"}`}>
-                    <Button variant={`${props.buttonVariant ? props.buttonVariant : "outline"}`}>{props.buttonTitle}</Button>
+                    <Button variant={`${props.buttonVariant ? props.buttonVariant : "outline"}`}>{props?.buttonIcon}</Button>
                 </DrawerTrigger>
                 <DrawerContent className="h-auto sm:h-[85vh] p-6">
                     <DrawerHeader className="px-0">

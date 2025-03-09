@@ -26,7 +26,9 @@ const SelectTrigger = React.forwardRef<
     <SelectPrimitive.Icon asChild>
       <IoCaretDownOutline className="mr-1 h-4 w-4" />
     </SelectPrimitive.Icon>
+    <div className="hidden md:block">
     {children}
+    </div>
   </SelectPrimitive.Trigger>
 ))
 SelectTrigger.displayName = SelectPrimitive.Trigger.displayName

@@ -17,6 +17,7 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { useState } from "react";
+import { FaPlus } from "react-icons/fa6";
 
 // ? PROPS TYPE
 type Props = {};
@@ -135,7 +136,7 @@ const ShortLink = (props: Props) => {
                     <main className="main p-5">
 
                         {/* ? TOOLBAR */}
-                        <div className="toolbar flex flex-col sm:flex-row flex-wrap gap-5 justify-between items-center">
+                        <div className="toolbar relative flex flex-row gap-5 justify-between items-center">
 
                             {/* ? FILTER */}
                             <div className="filter">
@@ -175,15 +176,17 @@ const ShortLink = (props: Props) => {
                             <div className="create-link">
                                 <LinkDialog
                                     buttonTitle="Create Link"
+                                    buttonIcon={<FaPlus />}
                                     buttonVariant="default"
                                     linkData={null}
+                                    handleClose={(data)=>{console.log(data)}}
                                 />
                             </div>
                         </div>
 
                         {/* ? MAIN CONTENT */}
-                        <div className="main-content my-5 flex flex-col gap-5">
-                            {Array(15).fill(null).map((item, index) => (
+                        <div className="main-content my-5 grid grid-cols-1 items-center justify-center gap-5">
+                            {Array(10).fill(null).map((item, index) => (
                                 <LinkCard
                                     key={index}
                                     shortLink="dub.sh/karanmistryyy"

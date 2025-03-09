@@ -35,7 +35,7 @@ const Filters: React.FC<FiltersProps> = ({ filters, useStatusFilterData, getAllC
                 <DropdownMenuTrigger asChild>
                     <Button variant="outline" className="font-normal">
                         <IoFilterSharp />
-                        <span>
+                        <span className="hidden md:block">
                             Filters
                         </span>
                     </Button>

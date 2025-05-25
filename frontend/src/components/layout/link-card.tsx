@@ -23,8 +23,11 @@ interface LinkCardProps {
 }
 
 const LinkCard = ({ shortLink, destinationUrl, status, clicks, linkData = null }: LinkCardProps) => {
+
     // STATE TO CONTROL THE DIALOG VISIBILITY
     const [openDialog, setOpenDialog] = useState(false)
+
+    const [data, setData] = useState<any>(linkData);
 
     // FUNCTION TO TOGGLE DIALOG VISIBILITY
     const handleDialogDisplay = (data: boolean) => {
@@ -110,7 +113,7 @@ const LinkCard = ({ shortLink, destinationUrl, status, clicks, linkData = null }
             {/* LINK DIALOG COMPONENT */}
             <LinkDialog
                 buttonVariant="default"
-                linkData={linkData}
+                linkData={data}
                 defaultOpen={openDialog}
                 handleClose={handleDialogDisplay}
             />

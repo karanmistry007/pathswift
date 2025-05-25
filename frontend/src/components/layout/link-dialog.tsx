@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { Info, Copy, Link } from "lucide-react"
+import { Copy, Link } from "lucide-react"
 import * as z from "zod"
 import { toast } from "sonner"
 import { PiDownloadSimpleFill } from "react-icons/pi";
@@ -14,14 +14,13 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { ReactElement, useEffect, useState } from "react"
 import { copyToClipboard } from '@/utils/utils'
-import { IconContext } from "react-icons/lib"
 
 // Schema definition
 const linkFormSchema = z.object({
     destination: z.string().url({ message: "Please enter a valid URL" }),
     shortLink: z.string().min(1, "Short link is required"),
     tags: z.array(z.string()).default([]),
-    comments: z.string().optional(),
+    description: z.string().optional(),
 })
 
 type LinkFormValues = z.infer<typeof linkFormSchema>
@@ -119,7 +118,6 @@ function LinkForm({
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-2">
                                             <FormLabel>Short Link</FormLabel>
-                                            {/* <Info className="w-3.5 h-3.5 text-muted-foreground" /> */}
                                         </div>
                                         <Button
                                             type="button"
@@ -132,7 +130,7 @@ function LinkForm({
                                         </Button>
                                     </div>
                                     <FormControl>
-                                        <Input {...field} />
+                                        <Input placeholder="short-link" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -147,7 +145,6 @@ function LinkForm({
                                 <FormItem className="space-y-1">
                                     <div className="block">
                                         <FormLabel>Tags</FormLabel>
-                                        {/* <Info className="w-3.5 h-3.5 text-muted-foreground" /> */}
                                     </div>
                                     <FormControl>
                                         <Input
@@ -169,18 +166,17 @@ function LinkForm({
                             )}
                         />
 
-                        {/* Comments */}
+                        {/* Description */}
                         <FormField
                             control={form.control}
-                            name="comments"
+                            name="description"
                             render={({ field }) => (
                                 <FormItem className="space-y-1">
                                     <div className="block">
-                                        <FormLabel>Comments</FormLabel>
-                                        {/* <Info className="w-3.5 h-3.5 text-muted-foreground" /> */}
+                                        <FormLabel>Description</FormLabel>
                                     </div>
                                     <FormControl>
-                                        <Textarea placeholder="Add comments..." className="resize-none h-24" {...field} />
+                                        <Textarea placeholder="Add description..." className="resize-none h-24" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -194,7 +190,6 @@ function LinkForm({
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-2">
                                     <FormLabel>QR Code</FormLabel>
-                                    {/* <Info className="w-3.5 h-3.5 text-muted-foreground" /> */}
                                 </div>
                                 <div className="buttons flex gap-2">
                                     <Button
@@ -256,7 +251,7 @@ export const LinkDialog = (props: Props) => {
         destination: "",
         shortLink: "",
         tags: [],
-        comments: "",
+        description: "",
     }
 
     const handleSubmit = async (data: LinkFormValues) => {
@@ -286,7 +281,7 @@ export const LinkDialog = (props: Props) => {
                                 <div className="p-2 bg-gray-100 rounded-full">
                                     <Link className="w-5 h-5" />
                                 </div>
-                                {props.linkData?.name ? `Edit ${props.linkData.name}` : "Create Link"}
+                                {props.linkData?.short_link ? `Edit ${props.linkData.short_link}` : "Create Link"}
                             </DialogTitle>
                         </DialogHeader>
                         {content}
@@ -308,7 +303,7 @@ export const LinkDialog = (props: Props) => {
                             <div className="p-2 bg-gray-100 rounded-full">
                                 <Link className="w-5 h-5" />
                             </div>
-                            {props.linkData?.name ? `Edit ${props.linkData.name}` : "Create Link"}
+                            {props.linkData?.short_link ? `Edit ${props.linkData.short_link}` : "Create Link"}
                         </DrawerTitle>
                     </DrawerHeader>
                     <div className="overflow-y-auto pr-6">{content}</div>

@@ -179,7 +179,7 @@ const ShortLink = (props: Props) => {
                                     buttonIcon={<FaPlus />}
                                     buttonVariant="default"
                                     linkData={null}
-                                    handleClose={(data)=>{console.log(data)}}
+                                    handleClose={(data) => { console.log(data) }}
                                 />
                             </div>
                         </div>
@@ -193,6 +193,7 @@ const ShortLink = (props: Props) => {
                                     destinationUrl="https://karanmistryyy.pythonanywhere.com/"
                                     status="active"
                                     clicks={8}
+                                    linkData={{ name: "1", short_link: "short-link-1" }}
                                 />
                             ))}
                         </div>
